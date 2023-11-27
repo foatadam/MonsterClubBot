@@ -456,7 +456,7 @@ async def generatebooster(ctx):
             packpicked = "IT"
     await selectmessage.delete()
     generatingmessage = await ctx.send("Generating Pack Now")
-
+    
     #generate random set of cards for that pack
     if packpicked == "S0":
         wholesetnumbers = range(75,131)
@@ -466,8 +466,12 @@ async def generatebooster(ctx):
         wholesetnumbers = range(1,64)
     cardnumbers = random.sample(wholesetnumbers, 9)
     cardindexs = []
+    singledigits = [1,2,3,4,5,6,7,8,9]
     for number in cardnumbers:
-        cardindexs.append(packpicked+"-"+str(number)+".png")
+        if number in singledigits:
+            cardindexs.append(packpicked+"-0"+str(number)+".png")
+        else:
+            cardindexs.append(packpicked+"-"+str(number)+".png")
     
     
     cardpackimages = [PIL.Image.open(i) for i in cardindexs]
